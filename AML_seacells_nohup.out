@@ -1,0 +1,464 @@
+nohup: ignoring input
+no change     /opt/conda/condabin/conda
+no change     /opt/conda/bin/conda
+no change     /opt/conda/bin/conda-env
+no change     /opt/conda/bin/activate
+no change     /opt/conda/bin/deactivate
+no change     /opt/conda/etc/profile.d/conda.sh
+no change     /opt/conda/etc/fish/conf.d/conda.fish
+no change     /opt/conda/shell/condabin/Conda.psm1
+no change     /opt/conda/shell/condabin/conda-hook.ps1
+no change     /opt/conda/lib/python3.8/site-packages/xontrib/conda.xsh
+no change     /opt/conda/etc/profile.d/conda.csh
+no change     /root/.bashrc
+No action taken.
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+Starting to run the script fot MDS
+findfont: Font family ['Raleway'] not found. Falling back to DejaVu Sans.
+findfont: Font family ['Lato'] not found. Falling back to DejaVu Sans.
+seurat_aml9.h5ad
+Creating model with 175 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/13080 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/13080 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/13080 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 169 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/16 [00:00<?, ?it/s] 62%|██████▎   | 10/16 [00:00<00:00, 92.51it/s]100%|██████████| 16/16 [00:00<00:00, 96.54it/s]
+Selecting 6 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00223
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Converged after 30 iterations.
+Model trained!
+seurat_aml6.h5ad
+Creating model with 218 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/16298 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/16298 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/16298 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 204 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/24 [00:00<?, ?it/s] 38%|███▊      | 9/24 [00:00<00:00, 89.26it/s] 75%|███████▌  | 18/24 [00:00<00:00, 88.12it/s]100%|██████████| 24/24 [00:00<00:00, 86.72it/s]
+Selecting 14 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00249
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Converged after 39 iterations.
+Model trained!
+seurat_aml11.h5ad
+Creating model with 57 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/4275 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/4275 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/4275 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 52 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/15 [00:00<?, ?it/s]100%|██████████| 15/15 [00:00<00:00, 257.49it/s]
+Selecting 5 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00128
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Converged after 32 iterations.
+Model trained!
+seurat_aml7.h5ad
+Creating model with 136 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/10198 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/10198 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/10198 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 122 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/24 [00:00<?, ?it/s] 79%|███████▉  | 19/24 [00:00<00:00, 187.91it/s]100%|██████████| 24/24 [00:00<00:00, 181.17it/s]
+Selecting 14 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00196
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Starting iteration 40.
+Completed iteration 40.
+Converged after 44 iterations.
+Model trained!
+seurat_aml8.h5ad
+Creating model with 193 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/14415 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/14415 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/14415 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 183 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/20 [00:00<?, ?it/s] 55%|█████▌    | 11/20 [00:00<00:00, 104.54it/s]100%|██████████| 20/20 [00:00<00:00, 92.92it/s] 
+Selecting 10 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00234
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Converged after 35 iterations.
+Model trained!
+seurat_aml10.h5ad
+Creating model with 209 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/15666 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/15666 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/15666 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 195 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/24 [00:00<?, ?it/s] 38%|███▊      | 9/24 [00:00<00:00, 84.70it/s] 75%|███████▌  | 18/24 [00:00<00:00, 86.25it/s]100%|██████████| 24/24 [00:00<00:00, 85.70it/s]
+Selecting 14 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00245
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Starting iteration 40.
+Completed iteration 40.
+Starting iteration 50.
+Completed iteration 50.
+Converged after 55 iterations.
+Model trained!
+seurat_aml1.h5ad
+Creating model with 208 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/15534 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/15534 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/15534 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 201 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/17 [00:00<?, ?it/s] 59%|█████▉    | 10/17 [00:00<00:00, 94.34it/s]100%|██████████| 17/17 [00:00<00:00, 91.52it/s]
+Selecting 7 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00242
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Starting iteration 40.
+Completed iteration 40.
+Converged after 41 iterations.
+Model trained!
+seurat_aml4.h5ad
+Creating model with 206 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/15406 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/15406 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/15406 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 198 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/18 [00:00<?, ?it/s] 56%|█████▌    | 10/18 [00:00<00:00, 98.40it/s]100%|██████████| 18/18 [00:00<00:00, 96.88it/s]
+Selecting 8 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00242
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Starting iteration 40.
+Completed iteration 40.
+Converged after 41 iterations.
+Model trained!
+seurat_aml5.h5ad
+Creating model with 168 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/12535 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/12535 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/12535 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 157 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/21 [00:00<?, ?it/s] 57%|█████▋    | 12/21 [00:00<00:00, 115.70it/s]100%|██████████| 21/21 [00:00<00:00, 112.10it/s]
+Selecting 11 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00218
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Converged after 33 iterations.
+Model trained!
+seurat_aml3.h5ad
+Creating model with 154 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/11530 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/11530 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/11530 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 149 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/15 [00:00<?, ?it/s] 53%|█████▎    | 8/15 [00:00<00:00, 76.64it/s]100%|██████████| 15/15 [00:00<00:00, 76.87it/s]
+Selecting 5 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00209
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Starting iteration 30.
+Completed iteration 30.
+Starting iteration 40.
+Completed iteration 40.
+Converged after 49 iterations.
+Model trained!
+seurat_aml2.h5ad
+Creating model with 188 metacells on X_umap...
+Welcome to SEACells!
+Model created!
+Computing kNN graph using scanpy NN ...
+Computing radius for adaptive bandwidth kernel...
+  0%|          | 0/14049 [00:00<?, ?it/s]
+Making graph symmetric...
+Parameter graph_construction = union being used to build KNN graph...
+Computing RBF kernel...
+  0%|          | 0/14049 [00:00<?, ?it/s]
+Building similarity LIL matrix...
+  0%|          | 0/14049 [00:00<?, ?it/s]
+Constructing CSR matrix...
+Building kernel on X_umap
+Computing diffusion components from X_umap for waypoint initialization ... 
+Determing nearest neighbor graph...
+Done.
+Sampling waypoints ...
+Done.
+Selecting 173 cells from waypoint initialization.
+Initializing residual matrix using greedy column selection
+Initializing f and g...
+  0%|          | 0/25 [00:00<?, ?it/s] 40%|████      | 10/25 [00:00<00:00, 97.71it/s] 80%|████████  | 20/25 [00:00<00:00, 95.20it/s]100%|██████████| 25/25 [00:00<00:00, 95.66it/s]
+Selecting 15 cells from greedy initialization.
+Model training started!
+Randomly initialized A matrix.
+Setting convergence threshold at 0.00230
+Starting iteration 1.
+Completed iteration 1.
+Starting iteration 10.
+Completed iteration 10.
+Starting iteration 20.
+Completed iteration 20.
+Converged after 23 iterations.
+Model trained!
