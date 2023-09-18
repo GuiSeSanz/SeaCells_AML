@@ -754,3 +754,16 @@ dev.off()
 
 
 # We are keeping the NMF 11
+
+combined_obj <- readRDS( '/home/sevastopol/data/gserranos/SEACells_AML/Data/SEACells/AML_metacells_RPCA_integrated_ann.rds')
+rank <- 11
+res_clustering <- readRDS(paste0('/home/sevastopol/data/gserranos/SEACells_AML/Data/NMF/res_NMF_Rank_Integrated_Norm_',rank,'.rds'))
+clustering_nmf <- setNames(as.data.frame(NMF::predict(res_clustering)), paste0('NMF_cluster_', rank))
+combined_obj$nmf_clustering_11 <- clustering_nmf
+
+Idents(object = combined_obj) <- 'nmf_clustering_11'
+de_results <- FindAllMarkers(combined_obj, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+de_results <- split(de_results, f=de_results$cluster)
+
+WriteXLS::WriteXLS(de_results, './Data/DE_1VsAll_NMF11.xlsx', SheetNames = names(de_results), 
+	row.names = FALSE, col.names = TRUE, verbose = FALSE)
