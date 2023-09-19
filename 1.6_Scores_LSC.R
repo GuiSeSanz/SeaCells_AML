@@ -21,14 +21,14 @@ get_umap <- function(data, color_by){
 	} else{
 		title <- color_by
 	}
-	p <- ggplot(coords, aes(x=UMAP_1, y=UMAP_2, color=coords[[color_by]])) + 
+	p <- ggplot(coords, aes(x=UMAP_1, y=UMAP_2, color=.data[[color_by]])) + 
 		 geom_point(size=0.5, alpha=1) + scale_color_manual(values=scanpy_colors_tmp) +
 		 theme_void() + theme(legend.position="right") + ggtitle(title)
 	return(p)
 }
 
 get_umap_signature <- function(data, color_by_pos, title){
-	p <- ggplot(data, aes(x=UMAP_1, y= UMAP_2, color= data[[color_by_pos]])) + 
+	p <- ggplot(data, aes(x=UMAP_1, y= UMAP_2, color= .data[[color_by_pos]])) + 
 			geom_point(size=1, alpha=0.6) +
 			scale_color_distiller(palette = "Spectral", direction = -1, name = title) + ggtitle(title) + 
 			theme_classic() + theme(legend.position="right", panel.background = element_blank(), 
@@ -36,8 +36,8 @@ get_umap_signature <- function(data, color_by_pos, title){
 	return(p)
 }
 
-get_violin <- function(data, color_by_pos, title){
-	p <- ggplot(data, aes(x=nmf_clustering_11, y= data[[color_by_pos]], fill=nmf_clustering_11)) + 
+get_violin <- function(data, color_by_pos, title, clustering_res = 'nmf_clustering_11'){
+	p <- ggplot(data, aes(x=.data[[clustering_res]], y=.data[[color_by_pos]], fill=nmf_clustering_11)) + 
 			geom_violin(trim=FALSE) + geom_boxplot(width = 0.1, fill="white")+
 			scale_fill_manual(values=scanpy_colors_tmp) + labs(y=title) + 
 			theme_classic() + theme(legend.position="none", panel.background = element_blank())
@@ -78,7 +78,7 @@ dev.off()
 
 
 
-######
+################################################
 # CALCULATING THE DIFFERENT SCORES
 
 # those genes not in the dataset:
@@ -109,13 +109,25 @@ names(negative_genes) <- 'negative_genes_signature'
 new_gene_list <- list(c('NPAL2', 'RBPMS', 'TRAF3IP2', 'PPP1R10', 'ATP1B1', 'NF1', 'RBPMS', 'FLJ13197', 'RBPMS', 'ABCG1', 'CLN5', 'LRRC8B', 'FRMD4B', 'ZFP30', 'C17orf86', 'C16orf5', 'TGIF2', 'RABGAP1', 'PPIG', 'GPR56', 'EIF2S3', 'NAB1', 'LRRC61', 'ATP1B1', 'ZNF500', 'CSDE1', 'C2CD2', 'PAQR6', 'FAM119B', 'ARPP-19', 'SETDB1', 'ZBTB39', 'RBPMS', 'SLC9A7', 'MAP3K7', 'ARL3', 'ZNF304', 'LOC552889', 'VGLL4', 'UBR5', 'PTCD2', 'CRKRS', 'IQGAP2', 'PLCH1', 'ARFGEF1', 'MAP3K7', 'PNPLA4'))
 names(new_gene_list) <- 'new_gene_list_signature'
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/All_signatures_LSC.pdf')
-ggplot(FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11')), aes(x=UMAP_1, y= UMAP_2, color= nmf_clustering_11)) + 
+# done in docker container
+# tmp_data <- combined_obj@assays$RNA@data
+# geneSets_all      <- GSEABase::GeneSet(genes_4_score, setName = 'all_genes_signature')
+# geneSets_positive <- GSEABase::GeneSet(unlist(positive_genes), setName = 'positive_genes_signature')
+# geneSets_negative <- GSEABase::GeneSet(unlist(negative_genes), setName = 'negative_genes_signature')
+# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_all)
+# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_all.rds')
+# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_positive)
+# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_posl.rds')
+# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_negative)
+# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_neg.rds')
+cluster_umap <- ggplot(FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11')), aes(x=UMAP_1, y= UMAP_2, color= nmf_clustering_11)) + 
 	geom_point(size=1, alpha=0.9) + scale_color_manual(values=scanpy_colors_tmp)+
 	guides(colour = guide_legend(override.aes = list(size=2)))+
 	theme_classic() + theme(legend.position="right", panel.background = element_blank(), 
 	axis.ticks=element_blank(), axis.text=element_blank()) 
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Paper.pdf')
+print(cluster_umap)
 LSC_score <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,genes_4_score), slot='scale.data')
 LSC_score$PaperScore <- (LSC_score[,'DNMT3B'] * 0.0874) + 
 						(LSC_score[,'ZBTB46'] * -0.0347) + 
@@ -145,7 +157,10 @@ ggplot(tmp, aes(x=nmf_clustering_11, fill=binarized_score)) + geom_bar(position=
 	scale_fill_manual(values=c('LSC'='#279e68', 'Other'='#aa40fc'))+
 	theme_classic() + theme(legend.position="right", panel.background = element_blank()) + ggtitle('Median Binarized PaperScore Distribution'),
 nrow=2)
+dev.off()
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Seurat.pdf')
+print(cluster_umap)
 tmp <- FetchData(
 				AddModuleScore(combined_obj, features=genes_4_score_list, name = 'LSC_SeuratScore_allGenes', assay='RNA'),
 				vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' , 'LSC_SeuratScore_allGenes1')
@@ -166,7 +181,10 @@ tmp <- FetchData(
 				)
 cowplot::plot_grid(get_umap_signature(tmp, 'LSC_SeuratScore_NegativeGenes1', 'LSC_SeuratScore\nNegativeGenes'),
 get_violin(tmp, 'LSC_SeuratScore_NegativeGenes1', 'LSC_SeuratScore\nNegativeGenes'), nrow=2)
+dev.off()
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Ucell.pdf')
+print(cluster_umap)
 tmp <- FetchData(
 				UCell::AddModuleScore_UCell(combined_obj, features=genes_4_score_list, name='_UCell'),
 				vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,'all_genes_signature_UCell')
@@ -187,20 +205,11 @@ tmp <- FetchData(
 				)
 cowplot::plot_grid(get_umap_signature(tmp, 'negative_genes_signature_UCell', 'LSC_UCellScoreNegativeGenes'),
 get_violin(tmp, 'negative_genes_signature_UCell', 'negative_genes\nsignature_UCell'), nrow=2)
+dev.off()
 
 
-# done in docker container
-# tmp_data <- combined_obj@assays$RNA@data
-# geneSets_all      <- GSEABase::GeneSet(genes_4_score, setName = 'all_genes_signature')
-# geneSets_positive <- GSEABase::GeneSet(unlist(positive_genes), setName = 'positive_genes_signature')
-# geneSets_negative <- GSEABase::GeneSet(unlist(negative_genes), setName = 'negative_genes_signature')
-# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_all)
-# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_all.rds')
-# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_positive)
-# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_posl.rds')
-# cells_AUC <- AUCell::AUCell_run(tmp_data, geneSets_negative)
-# saveRDS(cells_AUC, '/SEACells_AML/Data/Other/Signature_geneSets_neg.rds')
-
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_AUCell.pdf')
+print(cluster_umap)
 coords <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11'))
 tmp <- merge(coords, 
 	t(as.data.frame(AUCell::getAUC(readRDS('./Data/Other/Signature_geneSets_all.rds')))), 
@@ -219,8 +228,11 @@ tmp <- merge(coords,
 	by=0)
 cowplot::plot_grid(get_umap_signature(tmp, 'negative_genes_signature', 'LSC_AUCellS\nnegativeGenes'),
 get_violin(tmp, 'negative_genes_signature', 'LSC_AUCellSnegativeGenes'), nrow=2)
+dev.off()
 
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewNereaNat_Signature_Nat_UcellSeurat.pdf')
+print(cluster_umap)
 # new signature
 tmp <- FetchData(
 				AddModuleScore(combined_obj, features=new_gene_list, name = 'new_gene_list_signature_Seurat', assay='RNA'),
@@ -235,15 +247,80 @@ tmp <- FetchData(
 				)
 cowplot::plot_grid(get_umap_signature(tmp, 'new_gene_list_signature_UCell', 'LSC_UCellScoreAllGenes'),
 get_violin(tmp, 'new_gene_list_signature_UCell', 'signature_UCell'), nrow=2)
+dev.off()
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewAintzBulk_Signature_Seurat.pdf')
+print(cluster_umap)
 # signatures from Aintzane LSC Vs Blasts
+pos_aintz_genes <- read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/upreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE)
+neg_aintz_genes <- read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/downreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE)
 
+all_aintz_genes <- list(c(neg_aintz_genes[,1], pos_aintz_genes[, 1]))
+names(all_aintz_genes) <- 'all_aintz_genes'
+tmp <- FetchData(
+				AddModuleScore(combined_obj, features=all_aintz_genes, name = 'all_aintz_genes', assay='RNA'),
+				vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,'all_aintz_genes1')
+				)
+cowplot::plot_grid(get_umap_signature(tmp, 'all_aintz_genes1', 'LSC_AtzSig\nScoreAllGenes'),
+get_violin(tmp, 'all_aintz_genes1', 'signature_Seurat'), nrow=2)
+
+pos_aintz_genes <- list(pos_aintz_genes[,1])
+names(pos_aintz_genes) <- 'pos_aintz_genes'
+tmp <- FetchData(
+				AddModuleScore(combined_obj, features=pos_aintz_genes, name = 'pos_aintz_genes', assay='RNA'),
+				vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,'pos_aintz_genes1')
+				)
+cowplot::plot_grid(get_umap_signature(tmp, 'pos_aintz_genes1', 'LSC_AtzSigPos\nScoreAllGenes'),
+get_violin(tmp, 'pos_aintz_genes1', 'signature_Seurat'), nrow=2)
+
+neg_aintz_genes <- list(neg_aintz_genes[,1])
+names(neg_aintz_genes) <- 'neg_aintz_genes'
+tmp <- FetchData(
+				AddModuleScore(combined_obj, features=neg_aintz_genes, name = 'neg_aintz_genes', assay='RNA'),
+				vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,'neg_aintz_genes1')
+				)
+cowplot::plot_grid(get_umap_signature(tmp, 'neg_aintz_genes1', 'LSC_AtzNeg\nScoreAllGenes'),
+get_violin(tmp, 'neg_aintz_genes1', 'signature_Seurat'), nrow=2)
+ggplot(tmp, aes(x=score)) + geom_histogram(bins= 100) + theme_classic()
 
 dev.off()
 
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewAintzBulk_Signature_CART.pdf')
+print(cluster_umap)
+pos_aintz_genes <- setNames(read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/upreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE), c('gene_id', 'logFC'))
+neg_aintz_genes <- setNames(read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/downreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE), c('gene_id', 'logFC'))
+all_atz_genes <- rbind(pos_aintz_genes, neg_aintz_genes)
+# get the genes for the signature from the dataset
+tmp <- t(FetchData(combined_obj, vars = all_atz_genes$gene_id))
+# remove the genes not present in the dataset
+all_atz_genes <- all_atz_genes[all_atz_genes$gene_id %in% rownames(tmp), ]
 
+logplusone <- function(x) {log(x + 0.5)}
+tmp <- apply(tmp, 2, logplusone)
+tmp <- scale(tmp)
 
+tmp <- tmp * all_atz_genes$logFC
+score <- base::colSums(tmp)
+score <- as.data.frame(score)
+tmp <- FetchData(combined_obj, vars = c('UMAP_1', 'UMAP_2', 'nmf_clustering_11', 'nmf_clustering_14', 'nmf_clustering_7'))
+tmp <- merge(tmp, score, by=0)
 
+cowplot::plot_grid(get_umap_signature(tmp, 'score', 'LSC_Atz\nScoreCARThl')+ geom_text(aes(label=ifelse(score>=0,as.character(Row.names),'')),hjust=0,vjust=0),
+get_violin(tmp, 'score', 'signature_CART'), nrow=2)
+ggplot(tmp) + geom_histogram(aes(x=score), bins=100) + theme_classic()
+
+# cowplot::plot_grid(
+# 	get_umap_signature(tmp, 'score', 'quantile99\nScoreCARThl')+ geom_text(aes(label=ifelse(score>=quantile(tmp$score, probs=.99),as.character(Row.names),'')),hjust=0,vjust=0),
+# 	get_umap_signature(tmp, 'score', 'quantile95\nScoreCARThl')+ geom_text(aes(label=ifelse(score>=quantile(tmp$score, probs=.95),as.character(Row.names),'')),hjust=0,vjust=0), 
+# 	nrow=2
+# )
+
+ggplot() +
+geom_point(data = tmp[!tmp$score >= quantile(tmp$score, probs=.99),], aes(x=UMAP_1, y=UMAP_2), color='gray', alpha=0.6) +
+geom_point(data =  tmp[tmp$score >= quantile(tmp$score, probs=.99),], aes(x=UMAP_1, y=UMAP_2, color=nmf_clustering_11), alpha=1, size=3) + 
+scale_color_manual(values=scanpy_colors_tmp) + theme_classic() + ggtitle('quantile99')
+
+dev.off()
 
 pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_Scores_UMAP_IndGenes.pdf')
 for (gene in c(positive_genes, negative_genes)){
