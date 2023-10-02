@@ -62,10 +62,10 @@ for (rank in c(7, 11, 14)){
 	metagenes_rank[[as.character(rank)]] <- metagenes_per_cluster
 }
 
-WriteXLS::WriteXLS(metagenes_rank, paste0('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NMF_checks/genes_NMF_Rank_',rank,'.xlsx'), SheetNames=names(metagenes_rank))
+WriteXLS::WriteXLS(metagenes_rank, paste0('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/NMF_checks/genes_NMF_Rank_',rank,'.xlsx'), SheetNames=names(metagenes_rank))
 
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NMF_checks/genes_NMF_Rank_UMAPS.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/NMF_checks/genes_NMF_Rank_UMAPS.pdf')
 
 get_umap(coords, 'nmf_clustering_7')
 get_umap(coords, 'nmf_clustering_11')
@@ -126,7 +126,7 @@ cluster_umap <- ggplot(FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_c
 	theme_classic() + theme(legend.position="right", panel.background = element_blank(), 
 	axis.ticks=element_blank(), axis.text=element_blank()) 
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Paper.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/Signature_Nat_17_Paper.pdf')
 print(cluster_umap)
 LSC_score <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11' ,genes_4_score), slot='scale.data')
 LSC_score$PaperScore <- (LSC_score[,'DNMT3B'] * 0.0874) + 
@@ -159,7 +159,7 @@ ggplot(tmp, aes(x=nmf_clustering_11, fill=binarized_score)) + geom_bar(position=
 nrow=2)
 dev.off()
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Seurat.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/Signature_Nat_17_Seurat.pdf')
 print(cluster_umap)
 tmp <- FetchData(
 				AddModuleScore(combined_obj, features=genes_4_score_list, name = 'LSC_SeuratScore_allGenes', assay='RNA'),
@@ -183,7 +183,7 @@ cowplot::plot_grid(get_umap_signature(tmp, 'LSC_SeuratScore_NegativeGenes1', 'LS
 get_violin(tmp, 'LSC_SeuratScore_NegativeGenes1', 'LSC_SeuratScore\nNegativeGenes'), nrow=2)
 dev.off()
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_Ucell.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/Signature_Nat_17_Ucell.pdf')
 print(cluster_umap)
 tmp <- FetchData(
 				UCell::AddModuleScore_UCell(combined_obj, features=genes_4_score_list, name='_UCell'),
@@ -208,7 +208,7 @@ get_violin(tmp, 'negative_genes_signature_UCell', 'negative_genes\nsignature_UCe
 dev.off()
 
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/Signature_Nat_17_AUCell.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/Signature_Nat_17_AUCell.pdf')
 print(cluster_umap)
 coords <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nmf_clustering_11'))
 tmp <- merge(coords, 
@@ -231,7 +231,7 @@ get_violin(tmp, 'negative_genes_signature', 'LSC_AUCellSnegativeGenes'), nrow=2)
 dev.off()
 
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewNereaNat_Signature_Nat_UcellSeurat.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/NewNereaNat_Signature_Nat_UcellSeurat.pdf')
 print(cluster_umap)
 # new signature
 tmp <- FetchData(
@@ -249,7 +249,7 @@ cowplot::plot_grid(get_umap_signature(tmp, 'new_gene_list_signature_UCell', 'LSC
 get_violin(tmp, 'new_gene_list_signature_UCell', 'signature_UCell'), nrow=2)
 dev.off()
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewAintzBulk_Signature_Seurat.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/NewAintzBulk_Signature_Seurat.pdf')
 print(cluster_umap)
 # signatures from Aintzane LSC Vs Blasts
 pos_aintz_genes <- read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/upreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE)
@@ -285,7 +285,7 @@ ggplot(tmp, aes(x=score)) + geom_histogram(bins= 100) + theme_classic()
 
 dev.off()
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/NewAintzBulk_Signature_CART.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/NewAintzBulk_Signature_CART.pdf')
 print(cluster_umap)
 pos_aintz_genes <- setNames(read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/upreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE), c('gene_id', 'logFC'))
 neg_aintz_genes <- setNames(read.table('/home/sevastopol/data/gserranos/SEACells_AML/Data/Other/downreg_DEGs_LSCsVsBlasts_padj0.05.txt', sep = '\t', header = TRUE), c('gene_id', 'logFC'))
@@ -322,7 +322,7 @@ scale_color_manual(values=scanpy_colors_tmp) + theme_classic() + ggtitle('quanti
 
 dev.off()
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_Scores_UMAP_IndGenes.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/LSC_Scores_UMAP_IndGenes.pdf')
 for (gene in c(positive_genes, negative_genes)){
 	print(gene)
 	tmp <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', gene))
@@ -360,7 +360,7 @@ get_umap_list <- function(gene_list, obj = combined_obj){
 	return(plot_list)
 }
 
-pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signature_CONTROL.pdf')
+pdf('/home/sevastopol/data/gserranos/SEACells_AML/Plots/LSC_signatures/LSC_signature_CONTROL.pdf')
 DefaultAssay(combined_obj) <- "RNA"
 tmp <- FetchData(combined_obj, vars=c('UMAP_1', 'UMAP_2', 'nCount_RNA'))
 # tmp[tmp$nCount_RNA > 1000000, 'nCount_RNA'] <- 1000000
